@@ -90,6 +90,16 @@ app.post("/articles", function(req, res) {
 
     });
 });
+//////////////////////////
+
+app.route("/articles/:articleTitle")
+    .get(function(req, res) {
+        Article.findOne({ title: req.params.articleTitle }, function(err, foundArticle) {
+
+
+
+        })
+    })
 
 
 
