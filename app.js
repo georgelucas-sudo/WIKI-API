@@ -91,14 +91,36 @@ app.post("/articles", function(req, res) {
     });
 });
 //////////////////////////
+// use the async await method to get the data from the database of a specific article
+
+
+
+// app.get("/articles/:articleTitle", function(req, res) {
+//     Article.findOne({ title: req.params.articleTitle }, function(err, foundArticle) {
+//         if (foundArticle) {
+//             res.send(foundArticle);
+//         } else {
+//             res.send("no found article matching the title");
+//         }
+//     });
+// });
+
+
+
+
+
+
 
 app.route("/articles/:articleTitle")
-    .get(function(req, res) {
-        Article.findOne({ title: req.params.articleTitle }, function(err, foundArticle) {
+    .get(async function(req, res) {
+        try {
+            const foundArticle = await Article.findOne({ title: req.params.articleTitle });
+            res.send(foundArticle);
+        } catch (err) {
+            res.send(err);
 
+        }
 
-
-        })
     })
 
 
