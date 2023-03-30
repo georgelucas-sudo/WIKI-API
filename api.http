@@ -17,3 +17,9 @@ GET http://localhost:3000/articles
 
 ###
 GET http://localhost:3000/articles/Jack Bauer
+
+###
+PUT http://localhost:3000/articles/Jack Bauer
+
+###
+GET http://localhost:3000/articles/Chucky Norris

@@ -62,7 +62,6 @@ app.route("/articles") //refactored the code by using chain method
         });
     })
 
-
 // Article.find({}).then((articles) => { // find all articles in the database and return them as an array
 
 //     console.log(articles);
@@ -95,17 +94,6 @@ app.post("/articles", function(req, res) {
 
 
 
-// app.get("/articles/:articleTitle", function(req, res) {
-//     Article.findOne({ title: req.params.articleTitle }, function(err, foundArticle) {
-//         if (foundArticle) {
-//             res.send(foundArticle);
-//         } else {
-//             res.send("no found article matching the title");
-//         }
-//     });
-// });
-
-
 
 
 
@@ -122,6 +110,44 @@ app.route("/articles/:articleTitle")
         }
 
     })
+
+//.put chained route
+
+.put(async function(req, res) {
+    try {
+        const updatedArticle = await Article.updateOne({ title: req.params.articleTitle }, { title: req.body.title, content: req.body.content })
+            // res.send(updatedArticle);
+        res.send("successfully updated")
+
+    } catch (err) {
+
+
+        res.send(err);
+    };
+})
+
+.patch(async function(req, res) {
+        try {
+            await Article.updateOne({ title: req.params.articleTitle }, { $set: req.body })
+                // res.send(updatedArticle);
+            res.send("successfully updated")
+
+        } catch (err) {
+            res.send(err);
+
+        };
+    })
+    .delete(async function(req, res) {
+
+        try {
+            await Article.deleteOne({ title: req.params.articleTitle })
+            res.send("successfully deleted")
+
+        } catch (err) {
+
+            res.send(err)
+        };
+    });
 
 
 
